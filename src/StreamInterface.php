@@ -16,7 +16,7 @@ interface StreamInterface
      * @throws StreamArgumentException On invalid argument type provided (code: Stream::OPEN_FAILED)
      * @throws StreamRuntimeException  On error opening stream (code: Stream::INVALID_TYPE)
      */
-    public function __construct($resource = null);
+    public function __construct($resource = '');
 
     // -----------------------------------------------------------------------------------------------------------------
     //      METHODS > STREAM METADATA
@@ -117,6 +117,20 @@ interface StreamInterface
     public function read(int $maxBytes) : string;
 
     /**
+     * Reads line
+     * 
+     * @param int|null $maxBytes Maximum bytes to read
+     * If provided argument is lower than 1, an empty string is returned.
+     * 
+     * @throws StreamRuntimeException 
+     * On error trying to read (code: Stream::READ_FAILED)
+     * On unusable state (code: Stream::UNUSABLE)
+     * 
+     * @return string
+     */
+    public function readLine(?int $maxBytes = null) : string;
+
+    /**
      * Reads remainder of the stream and returns its string value
      * 
      * @throws StreamRuntimeException
@@ -128,14 +142,7 @@ interface StreamInterface
     public function getRemainingContents() : string;
 
     /**
-     * @return string Stream contents
-     * If stream is not seekable, you can use getContents()
-     * to retrieve remaining contents.
-     * 
-     * @throws StreamRuntimeException
-     * On unsusable state (code: Stream::UNUSABLE)
-     * On error trying to rewind (code: Stream::SEEK_FAILED)
-     * On error trying to read (code: Stream::READ_FAILED)
+     * @return string Entire stream contents or an empty string on error.
      */
     public function __toString() : string;
 

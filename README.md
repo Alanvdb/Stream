@@ -4,6 +4,8 @@ Stream class and interface with custom exceptions.
 
 ## Basic Usage
 
+See [StreamInterface](https://github.com/Alanvdb/Stream/blob/main/src/StreamInterface.php) For more details !
+
 ### Instanciate class
 
 You can instanciate Stream class providing a resource:
@@ -72,28 +74,3 @@ if ($stream->isSeekable()) {
     $position = $stream->tell(); // 10
 }
 ```
-
-## Method list
-
-Stream::__construct($resource = '')
-#### Metadata
-Stream::getSize() : ?int
-Stream::getMetadata() : array
-#### Seek
-Stream::isSeekable() : bool
-Stream::seek(int $offset, int $whence = SEEK_SET) : void
-Stream::rewind() : void
-Stream::tell() : int
-Stream::eof() : bool
-#### Read
-Stream::isReadable() : bool
-Stream::read(int $maxBytes = 8192) : string
-Stream::readLine(?int $maxBytes = null) : string
-Stream::getRemainingContents() : string
-Stream::__toString() : string
-#### Write
-Stream::isWritable() : bool
-Stream::write(string $data) : int
-#### Close
-Stream::detach()
-Stream::close() : void
